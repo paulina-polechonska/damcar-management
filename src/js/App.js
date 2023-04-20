@@ -1,11 +1,32 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 import Header from "./Header";
+import { createRoot } from 'react-dom/client';
+import {
+    HashRouter,
+    Route,
+    Routes,
+    Link,
+    NavLink,
+    Outlet, BrowserRouter
+} from 'react-router-dom';
+import TaskForm from "./TaskForm";
+import Login from "./Login";
+import Desktop from "./Desktop";
 
 
 const App = () => {
-  return (
-        <Header />
+  const [loginVisible, setSignInVisible] = useState(false);
+  const [username, setUsername] = useState();
 
+  return (
+      <BrowserRouter>
+          <Header />
+          <Routes>
+              <Route exact path={'/Pulpit'} element={< Desktop />}/>
+              <Route path={'/Login'} element={< Login />}/>
+              <Route path={'/Dodaj'} element={< TaskForm />}/>
+          </Routes>
+      </BrowserRouter>
   );
 }
 

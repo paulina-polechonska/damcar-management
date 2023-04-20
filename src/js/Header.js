@@ -12,14 +12,15 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import theme from "../theme/theme";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import {NavLink} from 'react-router-dom';
 
 
 
 
 const Header = () => {
 
-    const pages = ['Pulpit', 'Nowe zlecenie'];
+    const pages = ['Pulpit', 'Dodaj', 'Login'];
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
@@ -38,7 +39,7 @@ const Header = () => {
                     <Toolbar disableGutters>
                         <ConstructionIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }} color={'secondary'}/>
                         <Typography
-                            variant="h5"
+                            variant="h4"
                             noWrap
                             component="a"
                             href="/"
@@ -86,8 +87,17 @@ const Header = () => {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
+                                    <MenuItem
+                                        key={page}
+                                        onClick={handleCloseNavMenu}
+                                        component={NavLink}
+                                        to={`/${page}`}
+                                    >
+                                        <Typography
+                                            textAlign="center"
+                                        >
+                                            {page}
+                                        </Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -111,15 +121,22 @@ const Header = () => {
                         >
                             DAMCAR
                         </Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end'}}>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end'}}
+                             >
                             {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block', pr:'30px' }}
-                                >
-                                    {page}
-                                </Button>
+
+                                    <Button
+                                        key={page}
+                                        onClick={handleCloseNavMenu}
+                                        sx={{ my: 'auto', display: 'block', pr:'50px', fontSize:'1.1rem'}}
+                                        color={'white'}
+                                        component={NavLink}
+                                        to={`/${page}`}
+                                    >
+                                        {page}
+                                    </Button>
+
+
                             ))}
                         </Box>
 
