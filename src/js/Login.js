@@ -18,28 +18,30 @@ import image from "../images/img1.jpg";
 
 
 
+
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [openLoginWindow, setOpenLoginWindow] = useState(false);
 
-   const handleChange = event => {
-       setUsername(event.target.value)
-   }
+   // const handleChange = event => {
+   //     setUsername(event.target.value)
+   // }
 
     const handleSubmit = event => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        setUsername(data.get("login"));
         console.log({
-            email: data.get('email'),
-            password: data.get('password'),
+            username: data.get("login"),
+            // password: data.get('password'),
         });
     };
 
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl">
-                <Paper elevation={8} style={theme.root}>
+                <Paper elevation={8} style={theme.paper} sx={{ height: '80vh' }}>
                     <Grid container component="main" sx={{ height: '80vh' }}>
                         <CssBaseline />
                         <Grid
@@ -50,8 +52,6 @@ const Login = () => {
                             sx={{
                                 backgroundImage: `url(${image})`,
                                 backgroundRepeat: 'no-repeat',
-                                backgroundColor: (t) =>
-                                    t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                             }}
@@ -72,27 +72,27 @@ const Login = () => {
                                 <Typography component="h1" variant="h5">
                                     Logowanie
                                 </Typography>
-                                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                                     <TextField
                                         margin="normal"
                                         required
                                         fullWidth
-                                        id="email"
-                                        label="Email"
-                                        name="email"
-                                        autoComplete="email"
+                                        id="login"
+                                        label="Nazwa użytkownika"
+                                        name="login"
+                                        autoComplete="login"
                                         autoFocus
                                     />
-                                    <TextField
-                                        margin="normal"
-                                        required
-                                        fullWidth
-                                        name="password"
-                                        label="Hasło"
-                                        type="password"
-                                        id="password"
-                                        autoComplete="current-password"
-                                    />
+                                    {/*<TextField*/}
+                                    {/*    margin="normal"*/}
+                                    {/*    required*/}
+                                    {/*    fullWidth*/}
+                                    {/*    name="password"*/}
+                                    {/*    label="Hasło"*/}
+                                    {/*    type="password"*/}
+                                    {/*    id="password"*/}
+                                    {/*    autoComplete="current-password"*/}
+                                    {/*/>*/}
                                     <Button
                                         type="submit"
                                         fullWidth

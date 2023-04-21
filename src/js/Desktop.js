@@ -4,6 +4,6 @@ const Desktop = () => {
     return (
         <button>AAA</button>
     )
-}
+};
 
 export default Desktop;

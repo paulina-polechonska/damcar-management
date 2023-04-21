@@ -15,7 +15,7 @@ import Desktop from "./Desktop";
 
 
 const App = () => {
-  const [loginVisible, setSignInVisible] = useState(false);
+  const [showLoginWindow, setShowLoginWindow] = useState(false);
   const [username, setUsername] = useState();
 
   return (
@@ -23,7 +23,7 @@ const App = () => {
           <Header />
           <Routes>
               <Route exact path={'/Pulpit'} element={< Desktop />}/>
-              <Route path={'/Login'} element={< Login />}/>
+              <Route path={'/Zaloguj'} element={< Login />}/>
               <Route path={'/Dodaj'} element={< TaskForm />}/>
           </Routes>
       </BrowserRouter>

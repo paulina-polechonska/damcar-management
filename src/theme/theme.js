@@ -1,5 +1,5 @@
 import {createTheme} from "@mui/material/styles";
-import { withStyles } from '@mui/material/styles';
+
 
 const theme = createTheme({
     palette: {
@@ -18,28 +18,14 @@ const theme = createTheme({
 
     },
 
-    root: {
-        // padding: 10,
+    paper: {
         minWidth: 500,
-        width: '100%',
         marginTop: 50,
         marginBottom: 50,
         marginLeft: 'auto',
         marginRight: 'auto'
 
     },
-    // table: {
-    //     minWidth: 1200
-    // },
-    // tableWrapper: {
-    //     overflowX: 'auto'
-    // },
-    // loader: {
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     height: '200px'
-    // }
 
     typography: {
         fontFamily: [
@@ -47,6 +33,26 @@ const theme = createTheme({
             'san-serif',
         ].join(','),
     },
+
+    form: {
+        container: {
+            display: 'flex',
+            flexWrap: 'wrap',
+            margin: '0 auto',
+        },
+
+        textField: {
+            width: '100%'
+        },
+        textArea: {
+            width: '100%'
+        },
+        button: {
+            margin: 20,
+            width: '100%'
+        },
+
+    }
 });
 
 export default theme;

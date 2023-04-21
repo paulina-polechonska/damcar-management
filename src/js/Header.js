@@ -14,13 +14,14 @@ import ConstructionIcon from '@mui/icons-material/Construction';
 import theme from "../theme/theme";
 import { ThemeProvider } from '@mui/material/styles';
 import {NavLink} from 'react-router-dom';
+import {AccountCircleOutlined} from "@mui/icons-material";
 
 
 
 
 const Header = () => {
 
-    const pages = ['Pulpit', 'Dodaj', 'Login'];
+    const pages = ['Pulpit', 'Dodaj', 'Zaloguj'];
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
@@ -33,11 +34,12 @@ const Header = () => {
 
 
     return (
+
         <ThemeProvider theme={theme}>
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <ConstructionIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }} color={'secondary'}/>
+                        <ConstructionIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 2, fontSize: '2rem' }} color={'secondary'}/>
                         <Typography
                             variant="h4"
                             noWrap
@@ -140,7 +142,27 @@ const Header = () => {
                             ))}
                         </Box>
 
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                        <AccountCircleOutlined
+                            color={'secondary'}
+                            sx={{fontSize: '2rem'}}
+                        />
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            href="/"
+                            sx={{
+                                ml: 1,
+                                mr: 1,
+                                display: { xs: 'none', md: 'flex' },
+
+
+                                textDecoration: 'none',
+                            }}
+                            color={'secondary'}
+                        >
+                            Login
+                        </Typography>
                     </Toolbar>
                 </Container>
             </AppBar>
