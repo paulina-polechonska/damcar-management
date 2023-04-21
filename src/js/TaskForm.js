@@ -38,7 +38,7 @@ const TaskForm = () => {
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl">
-                <Paper elevation={8} style={theme.paper} sx={{ height: '80vh', padding: 3 }}>
+                <Paper elevation={8} style={theme.paper} sx={{ height: { xs: '100%', md: '80%' }, padding: 3 }}>
                     <Typography variant="h4" component="h2" align={'center'} gutterBottom sx={{pt: 3, pb: 5}}>
                         Dodaj nowe zlecenie
                     </Typography>
@@ -134,11 +134,10 @@ const TaskForm = () => {
                         </Grid>
 
                         <Grid item xs={12} md={6}>
-                            <Button
+                            <Button fullWidth
                                 type="submit"
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
-                                style={theme.form.button}
                             >
                                 Dodaj
                             </Button>

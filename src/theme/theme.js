@@ -41,17 +41,6 @@ const theme = createTheme({
             margin: '0 auto',
         },
 
-        textField: {
-            width: '100%'
-        },
-        textArea: {
-            width: '100%'
-        },
-        button: {
-            margin: 20,
-            width: '100%'
-        },
-
     }
 });
 
