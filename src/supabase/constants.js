@@ -1,0 +1,2 @@
+export const REACT_APP_SUPABASE_URL = 'https://argfgjtkvymykjethcus.supabase.co';
+export const REACT_APP_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyZ2ZnanRrdnlteWtqZXRoY3VzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MjE1NTQxMSwiZXhwIjoxOTk3NzMxNDExfQ.YOLvrh6lg4SRTeR8Gf3gXURrkYvu4joKejtZ9e7hi0E';

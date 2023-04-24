@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import Grid from '@mui/material/Grid';
-import Item from '@mui/material/Grid';
 import {ThemeProvider} from "@mui/material/styles";
 import theme from "../theme/theme";
 import Container from "@mui/material/Container";
@@ -11,6 +10,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import {FormControl, InputLabel, Select, FormControlLabel} from "@mui/material";
 import Checkbox from '@mui/material/Checkbox';
+import {supabase} from "../supabase/api";
+import {useNavigate} from "react-router-dom";
 
 
 const brands = [
@@ -20,10 +21,13 @@ const brands = [
     'Mercedes',
     'Peugeot',
     'Skoda',
-    'Volkswagen'
+    'Volkswagen',
+    'Inny'
 ];
 
 const TaskForm = () => {
+    const navigate = useNavigate();
+
     const [clientName, setClientName] = useState('');
     const [clientPhone, setClientPhone] = useState('');
     const [carNumber, setCarNumber] = useState('');
@@ -33,28 +37,30 @@ const TaskForm = () => {
     const [checked, setChecked] = useState(false);
     // const [errors, setErrors] = useState([]);
 
-    // funkcja pomocnicza tworząca finalny obiekt z danymi na podstawie danych wejściowych i wartości w inputach
     const prepareData = () => {
         return {
-            client: {
-                clientName,
-                clientPhone
-            },
-            car: {
-                carNumber,
-                carBrand,
-                carType
-            },
-            toDo: repair,
-            accept: checked
+            client_name: clientName,
+            client_phone: clientPhone,
+            car_number: carNumber,
+            car_brand: carBrand,
+            car_type: carType,
+            to_do: repair,
+            assent: checked
         }
+    }
+
+    async function addTask() {
+        const { data, error } = await supabase
+            .from('tasks')
+            .insert(prepareData())
+            .select()
     }
 
     const handleSumbit = (event) => {
         event.preventDefault();
-        // if (typeof onSubmit === "function") {
-        //     onSubmit(prepareData())
-        // }
+        addTask();
+        console.log(prepareData())
+        navigate('/Pulpit');
     };
 
     return (
@@ -137,7 +143,7 @@ const TaskForm = () => {
                                     label="Model"
                                     variant="outlined"
                                     onChange={(e) => {
-                                        setCarNumber(e.target.value)}}
+                                        setCarType(e.target.value)}}
                                 />
                             </FormControl>
                         </Grid>
