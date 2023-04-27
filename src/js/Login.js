@@ -83,7 +83,7 @@ const Login = () => {
                                             onChange={(e) => {
                                                 setUsername(e.target.value)
                                             }}
-                                            error
+                                            error={(username.length < 5)}
                                             helperText={(username.length < 5) ? errors : null}
                                         />
                                         {/*<TextField*/}
