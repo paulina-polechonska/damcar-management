@@ -23,14 +23,12 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row" >
-                    {row.client_name}
-                </TableCell>
-                <TableCell >{row.client_phone}</TableCell>
-                <TableCell >{row.car_number}</TableCell>
-                <TableCell align="center">{row.car_brand}</TableCell>
-                <TableCell align="center">{row.car_type}</TableCell>
-                <TableCell align="right">
+                <TableCell component="th" scope="row" >{row.car_number}</TableCell>
+                <TableCell component="th" scope="row">{row.car_brand}</TableCell>
+                <TableCell component="th" scope="row">{row.car_type}</TableCell>
+                <TableCell component="th" scope="row" align="center">{row.client_name}</TableCell>
+                <TableCell component="th" scope="row" align="center">{row.client_phone}</TableCell>
+                <TableCell component="th" scope="row" align="right">
                     <IconButton aria-label="delete">
                         <DeleteIcon />
                     </IconButton>

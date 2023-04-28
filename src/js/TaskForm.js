@@ -35,7 +35,7 @@ const TaskForm = () => {
     const [carType, setCarType] = useState('');
     const [repair, setRepair] = useState('');
     const [checked, setChecked] = useState(false);
-    // const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
 
     const prepareData = () => {
         return {
@@ -49,18 +49,29 @@ const TaskForm = () => {
         }
     }
 
-    async function addTask() {
+
+    const handleSumbit = async (event) => {
+        event.preventDefault();
+
+        if(!clientName || !clientPhone || !carNumber || !carType || !carBrand || !repair) {
+            setErrors('Uzupełnij wszystkie pola formularza!')
+            return
+        }
+
         const { data, error } = await supabase
             .from('tasks')
-            .insert(prepareData())
+            .insert([prepareData()])
             .select()
-    }
 
-    const handleSumbit = (event) => {
-        event.preventDefault();
-        addTask();
-        console.log(prepareData())
-        navigate('/Pulpit');
+
+        if(error) {
+            setErrors('Uzupełnij wszystkie pola formularza!')
+        }
+        if(data) {
+            setErrors([]);
+            navigate('/Pulpit');
+        }
+
     };
 
     return (
@@ -83,7 +94,8 @@ const TaskForm = () => {
                         <Grid item xs={12} md={6}>
                             <FormControl fullWidth>
                                 <TextField
-                                    id="client-name"
+                                    id="clientName"
+                                    value={clientName}
                                     label="Klient"
                                     variant="outlined"
                                     onChange={(e) => {
@@ -94,7 +106,8 @@ const TaskForm = () => {
                         <Grid item xs={12} md={6}>
                             <FormControl fullWidth>
                                 <TextField
-                                    id="client-phone"
+                                    id="clientPhone"
+                                    value={clientPhone}
                                     label="Telefon"
                                     variant="outlined"
                                     onChange={(e) => {
@@ -106,7 +119,8 @@ const TaskForm = () => {
                         <Grid item xs={12} md={4}>
                             <FormControl fullWidth>
                                 <TextField
-                                    id="car-number"
+                                    id="carNumber"
+                                    value={carNumber}
                                     label="Numer rejestracyjny"
                                     variant="outlined"
                                     onChange={(e) => {
@@ -120,7 +134,7 @@ const TaskForm = () => {
                                 <InputLabel id="brand">Marka</InputLabel>
                                 <Select
                                     labelId="brand"
-                                    id="brand-select"
+                                    id="carBrand"
                                     value={carBrand}
                                     label="Marka"
                                     onChange={(e) => {
@@ -139,7 +153,8 @@ const TaskForm = () => {
                         <Grid item xs={12} md={4}>
                             <FormControl fullWidth>
                                 <TextField
-                                    id="car-type"
+                                    id="carType"
+                                    value={carType}
                                     label="Model"
                                     variant="outlined"
                                     onChange={(e) => {
@@ -152,6 +167,7 @@ const TaskForm = () => {
                             <FormControl fullWidth>
                                 <TextField
                                     id="repair"
+                                    value={repair}
                                     label="Zakres napraw"
                                     multiline
                                     rows={5}
@@ -160,6 +176,14 @@ const TaskForm = () => {
                                 />
                             </FormControl>
                         </Grid>
+
+                        {errors &&
+                            <Grid item xs={12}>
+                                <Typography color={'secondary'}>{errors}</Typography>
+                            </Grid>
+                        }
+
+
                         <Grid item xs={12} md={6}>
                             <FormControlLabel control={
                                 <Checkbox
