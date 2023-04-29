@@ -25,7 +25,9 @@ const brands = [
     'Inny'
 ];
 
-const TaskForm = () => {
+const TaskForm = (props) => {
+    const { submitLabel } = props;
+
     const navigate = useNavigate();
 
     const [clientName, setClientName] = useState('');
@@ -206,7 +208,7 @@ const TaskForm = () => {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                Dodaj
+                                {submitLabel}
                             </Button>
 
                         </Grid>

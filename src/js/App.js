@@ -10,6 +10,8 @@ import {
 import TaskForm from "./TaskForm";
 import Login from "./Login";
 import Desktop from "./Desktop";
+import AddTask from "./AddTask";
+import UpdateTask from "./UpdateTask";
 
 const App = () => {
   // const [showLoginWindow, setShowLoginWindow] = useState(false);
@@ -21,7 +23,8 @@ const App = () => {
           <Routes>
               <Route exact path={'/Pulpit'} element={< Desktop />}/>
               <Route path={'/Zaloguj'} element={< Login />}/>
-              <Route path={'/Dodaj'} element={< TaskForm />}/>
+              <Route path={'/Dodaj'} element={< AddTask />}/>
+              <Route path={'/:id'} element={< UpdateTask />}/>
           </Routes>
       </BrowserRouter>
   );

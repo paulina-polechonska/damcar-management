@@ -5,6 +5,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from '@mui/icons-material/Check';
+import {Link, NavLink} from 'react-router-dom';
 
 
 function Row(props) {
@@ -32,7 +33,10 @@ function Row(props) {
                     <IconButton aria-label="delete">
                         <DeleteIcon />
                     </IconButton>
-                    <IconButton aria-label="delete">
+                    <IconButton
+                        aria-label="delete"
+                        component={NavLink}
+                        to={'/' + row.id}>
                         <EditIcon />
                     </IconButton>
                     <IconButton aria-label="delete">
