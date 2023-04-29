@@ -34,12 +34,12 @@ function Row(props) {
                         <DeleteIcon />
                     </IconButton>
                     <IconButton
-                        aria-label="delete"
+                        aria-label="edit"
                         component={NavLink}
                         to={'/' + row.id}>
                         <EditIcon />
                     </IconButton>
-                    <IconButton aria-label="delete">
+                    <IconButton aria-label="check">
                         <CheckIcon />
                     </IconButton>
                 </TableCell>

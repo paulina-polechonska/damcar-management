@@ -7,10 +7,9 @@ import {
     Routes,
     BrowserRouter
 } from 'react-router-dom';
-import TaskForm from "./TaskForm";
+import AddTask from "./AddTask";
 import Login from "./Login";
 import Desktop from "./Desktop";
-import AddTask from "./AddTask";
 import UpdateTask from "./UpdateTask";
 
 const App = () => {
