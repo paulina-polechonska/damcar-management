@@ -14,11 +14,11 @@ import UpdateTask from "./UpdateTask";
 
 const App = () => {
   // const [showLoginWindow, setShowLoginWindow] = useState(false);
-  // const [username, setUsername] = useState();
+  const [userName, setUsername] = useState();
 
   return (
       <BrowserRouter>
-          <Header />
+          <Header username={userName}/>
           <Routes>
               <Route exact path={'/Pulpit'} element={< Desktop />}/>
               <Route path={'/Zaloguj'} element={< Login />}/>

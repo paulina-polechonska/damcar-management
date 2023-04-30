@@ -6,11 +6,29 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from '@mui/icons-material/Check';
 import {Link, NavLink} from 'react-router-dom';
+import {supabase} from "../../supabase/api";
+
 
 
 function Row(props) {
-    const {row} = props;
+    const {row, onDelete} = props;
     const [open, setOpen] = useState(false);
+
+    const handleDelete = async () => {
+        const {data, error } = await supabase
+            .from('tasks')
+            .delete()
+            .eq('id', row.id)
+            .select()
+
+        if (error) {
+            console.log(error)
+        }
+        if (data) {
+            console.log(data)
+            onDelete(row.id);
+        }
+    }
 
     return (
         <>
@@ -30,7 +48,7 @@ function Row(props) {
                 <TableCell component="th" scope="row" align="center">{row.client_name}</TableCell>
                 <TableCell component="th" scope="row" align="center">{row.client_phone}</TableCell>
                 <TableCell component="th" scope="row" align="right">
-                    <IconButton aria-label="delete">
+                    <IconButton aria-label="delete" onClick={handleDelete}>
                         <DeleteIcon />
                     </IconButton>
                     <IconButton

@@ -8,7 +8,7 @@ import Row from "./Table/Row";
 
 
 const TasksList = (props) => {
-    const {rows} = props;
+    const {rows, handleDeleteRow} = props;
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -50,7 +50,9 @@ const TasksList = (props) => {
                                         ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         : rows
                                 ).map((row) => (
-                                    <Row key={row.id} row={row} />
+                                    <Row key={row.id}
+                                         row={row}
+                                         onDelete={handleDeleteRow}/>
                                 ))}
 
                                 {emptyRows > 0 && (

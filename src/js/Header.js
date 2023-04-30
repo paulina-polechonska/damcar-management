@@ -19,8 +19,8 @@ import {AccountCircleOutlined} from "@mui/icons-material";
 
 
 
-const Header = () => {
-
+const Header = (props) => {
+    const { username } = props
     const pages = ['Pulpit', 'Dodaj', 'Zaloguj'];
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -161,7 +161,7 @@ const Header = () => {
                             }}
                             color={'secondary'}
                         >
-                            Login
+                            {username}
                         </Typography>
                     </Toolbar>
                 </Container>
