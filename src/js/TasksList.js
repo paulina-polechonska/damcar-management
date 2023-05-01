@@ -5,12 +5,19 @@ import {Table, TableBody, TableHead, TableContainer, TableCell, TableFooter, Tab
 import theme from "../theme/theme";
 import TablePaginationActions from "./Table/TablePaginationActions";
 import Row from "./Table/Row";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import {useNavigate} from "react-router-dom";
+
+
 
 
 const TasksList = (props) => {
     const {rows, handleDeleteRow} = props;
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const navigate = useNavigate();
 
     // stały rozmiar, nawet, jak są puste wiersze
     const emptyRows =
@@ -25,22 +32,35 @@ const TasksList = (props) => {
         setPage(0);
     };
 
+    const handleAdd = () => {
+        navigate('/Dodaj');
+    }
+
+
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl" >
                 <Paper elevation={8} style={theme.paper} sx={{ padding: 5}}>
-                    <Typography component="h2" variant="h5" color="secondary" gutterBottom>
-                        Aktualne zlecenia
-                    </Typography>
+                    <Box display="flex" justifyContent="space-between">
+                        <Typography component="h2" variant="h5" color="secondary" gutterBottom>
+                            Aktualne zlecenia
+                        </Typography>
+
+                        <Fab color="secondary" aria-label="add" onClick={handleAdd}>
+                            <AddIcon />
+                        </Fab>
+
+                    </Box>
+
+
                     <TableContainer sx={{height: '100%', paddingTop: 3}}>
                         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table collapsible">
-                            <TableHead>
-                                <TableRow  color="secondary">
+                            <TableHead >
+                                <TableRow >
                                     <TableCell />
                                     <TableCell align="center">Status</TableCell>
                                     <TableCell align="center">Numer rejestracyjny</TableCell>
-                                    <TableCell align="center">Marka</TableCell>
-                                    <TableCell align="center">Model</TableCell>
+                                    <TableCell align="center">Pojazd</TableCell>
                                     <TableCell align="center">Klient</TableCell>
                                     <TableCell align="center">Telefon</TableCell>
                                     <TableCell align="center">Akcje</TableCell>

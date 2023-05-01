@@ -8,10 +8,12 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import {FormControl, InputLabel, Select, FormControlLabel} from "@mui/material";
+import {FormControl, InputLabel, Select, FormControlLabel, IconButton} from "@mui/material";
 import Checkbox from '@mui/material/Checkbox';
 import {supabase} from "../supabase/api";
 import {useNavigate} from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
+import Box from '@mui/material/Box';
 
 
 const brands = [
@@ -26,7 +28,7 @@ const brands = [
 ];
 
 const AddTask = (props) => {
-    const { initData, submitLabel, title } = props;
+    // const { initData, submitLabel, title } = props;
 
     const navigate = useNavigate();
 
@@ -76,10 +78,20 @@ const AddTask = (props) => {
 
     };
 
+    const handleClose = () => {
+        navigate('/Pulpit');
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl">
                 <Paper elevation={8} style={theme.paper} sx={{  padding: 3 }}>
+                    <Box display="flex" justifyContent="flex-end">
+                        <IconButton onClick={handleClose}>
+                            <CloseIcon />
+                        </IconButton>
+                    </Box>
+
                     <Typography variant="h4" component="h2" align={'center'} gutterBottom sx={{pb: 2}}>
                         Dodaj zlecenie
                     </Typography>

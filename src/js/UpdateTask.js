@@ -7,12 +7,14 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import {FormControl, FormControlLabel, InputLabel, Select} from "@mui/material";
+import {FormControl, FormControlLabel, IconButton, InputLabel, Select} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
+import Box from "@mui/material/Box";
+import CloseIcon from "@mui/icons-material/Close";
 
 
 const UpdateTask = () => {
@@ -105,11 +107,20 @@ const UpdateTask = () => {
 
     };
 
+    const handleClose = () => {
+        navigate('/Pulpit');
+    }
 
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl">
                 <Paper elevation={8} style={theme.paper} sx={{ height: { xs: '100%', md: '80%' }, padding: 3 }}>
+                    <Box display="flex" justifyContent="flex-end">
+                        <IconButton onClick={handleClose}>
+                            <CloseIcon />
+                        </IconButton>
+                    </Box>
+
                     <Typography variant="h4" component="h2" align={'center'} gutterBottom sx={{pt: 3, pb: 5}}>
                         Edycja zlecenia
                     </Typography>
