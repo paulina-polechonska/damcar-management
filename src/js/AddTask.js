@@ -79,11 +79,10 @@ const AddTask = (props) => {
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl">
-                <Paper elevation={8} style={theme.paper} sx={{ height: { xs: '100%', md: '80%' }, padding: 3 }}>
-                    <Typography variant="h4" component="h2" align={'center'} gutterBottom sx={{pt: 3, pb: 5}}>
+                <Paper elevation={8} style={theme.paper} sx={{  padding: 3 }}>
+                    <Typography variant="h4" component="h2" align={'center'} gutterBottom sx={{pb: 2}}>
                         Dodaj zlecenie
                     </Typography>
-
 
                 <form onSubmit={handleSumbit}>
 
@@ -91,7 +90,7 @@ const AddTask = (props) => {
                           direction="row"
                           justifyContent="center"
                           alignItems="center"
-                          spacing={6}
+                          spacing={3}
                     >
                         <Grid item xs={12} md={6}>
                             <FormControl fullWidth>
@@ -186,7 +185,7 @@ const AddTask = (props) => {
                         }
 
 
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12}>
                             <FormControlLabel control={
                                 <Checkbox
                                     checked={checked}
@@ -198,9 +197,6 @@ const AddTask = (props) => {
                                 label="Zgoda na naprawę i koszty"/>
 
                         </Grid>
-                        <Grid item xs={12} md={6}>
-
-                        </Grid>
 
                         <Grid item xs={12} md={6}>
                             <Button fullWidth
@@ -210,14 +206,9 @@ const AddTask = (props) => {
                             >
                                 Dodaj
                             </Button>
-
                         </Grid>
-
                     </Grid>
-
                 </form>
-
-
 
                 </Paper>
             </Container>

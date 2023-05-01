@@ -7,6 +7,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from '@mui/icons-material/Check';
 import {Link, NavLink} from 'react-router-dom';
 import {supabase} from "../../supabase/api";
+import Button from "@mui/material/Button";
+import theme from "../../theme/theme";
+import {ThemeProvider} from "@mui/material/styles";
 
 
 
@@ -31,7 +34,7 @@ function Row(props) {
     }
 
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <TableRow sx={{ '& > *': { borderBottom: 'none' } }}>
                 <TableCell>
                     <IconButton
@@ -42,9 +45,19 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row" >{row.car_number}</TableCell>
-                <TableCell component="th" scope="row">{row.car_brand}</TableCell>
-                <TableCell component="th" scope="row">{row.car_type}</TableCell>
+                <TableCell component="th" scope="row" align="center" >
+                    <Button
+                        size="small"
+                        variant="contained"
+                        fullWidth
+                        color={row.assent ? 'secondary' : 'primary'}
+                        >
+                        {row.assent ? 'W realizacji' : 'Nowy'}
+                    </Button>
+                </TableCell>
+                <TableCell component="th" scope="row" align="center">{row.car_number}</TableCell>
+                <TableCell component="th" scope="row" align="center">{row.car_brand}</TableCell>
+                <TableCell component="th" scope="row" align="center">{row.car_type}</TableCell>
                 <TableCell component="th" scope="row" align="center">{row.client_name}</TableCell>
                 <TableCell component="th" scope="row" align="center">{row.client_phone}</TableCell>
                 <TableCell component="th" scope="row" align="right">
@@ -63,7 +76,7 @@ function Row(props) {
                 </TableCell>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Typography variant="h6" gutterBottom component="div">
@@ -81,7 +94,7 @@ function Row(props) {
                     </Collapse>
                 </TableCell>
             </TableRow>
-        </>
+            </ThemeProvider>
     );
 }
 

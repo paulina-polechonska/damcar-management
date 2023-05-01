@@ -37,12 +37,13 @@ const TasksList = (props) => {
                             <TableHead>
                                 <TableRow  color="secondary">
                                     <TableCell />
-                                    <TableCell>Numer rejestracyjny</TableCell>
-                                    <TableCell>Marka</TableCell>
-                                    <TableCell>Model</TableCell>
+                                    <TableCell align="center">Status</TableCell>
+                                    <TableCell align="center">Numer rejestracyjny</TableCell>
+                                    <TableCell align="center">Marka</TableCell>
+                                    <TableCell align="center">Model</TableCell>
                                     <TableCell align="center">Klient</TableCell>
                                     <TableCell align="center">Telefon</TableCell>
-                                    <TableCell align="center"> </TableCell>
+                                    <TableCell align="center">Akcje</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -57,7 +58,7 @@ const TasksList = (props) => {
 
                                 {emptyRows > 0 && (
                                     <TableRow style={{ height: 53 * emptyRows }}>
-                                        <TableCell colSpan={7} />
+                                        <TableCell colSpan={8} />
                                     </TableRow>
                                 )}
                             </TableBody>
@@ -65,7 +66,7 @@ const TasksList = (props) => {
                                 <TableRow>
                                     <TablePagination
                                         rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                                        colSpan={7}
+                                        colSpan={8}
                                         count={rows.length}
                                         rowsPerPage={rowsPerPage}
                                         page={page}
