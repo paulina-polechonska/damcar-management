@@ -20,7 +20,7 @@ import {AccountCircleOutlined} from "@mui/icons-material";
 
 
 const Header = (props) => {
-    const { username } = props
+    const { usernameH } = props
     const pages = ['Pulpit', 'Dodaj'];
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -95,9 +95,7 @@ const Header = (props) => {
                                         component={NavLink}
                                         to={`/${page}`}
                                     >
-                                        <Typography
-                                            textAlign="center"
-                                        >
+                                        <Typography>
                                             {page}
                                         </Typography>
                                     </MenuItem>
@@ -123,17 +121,18 @@ const Header = (props) => {
                         >
                             DAMCAR
                         </Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end'}}
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', pr:'30px'}}
                              >
                             {pages.map((page) => (
 
                                     <Button
                                         key={page}
                                         onClick={handleCloseNavMenu}
-                                        sx={{ my: 'auto', display: 'block', pr:'50px', fontSize:'1.1rem'}}
+                                        sx={{ my: 'auto', display: (usernameH==='Login') ? "none" : "block" , fontSize:'1.1rem', padding: '15px'}}
                                         color={'white'}
                                         component={NavLink}
                                         to={`/${page}`}
+
                                     >
                                         {page}
                                     </Button>
@@ -161,7 +160,7 @@ const Header = (props) => {
                             }}
                             color={'secondary'}
                         >
-                            {username}
+                            {usernameH}
                         </Typography>
                     </Toolbar>
                 </Container>

@@ -11,20 +11,23 @@ import AddTask from "./AddTask";
 import Login from "./Login";
 import Desktop from "./Desktop";
 import UpdateTask from "./UpdateTask";
+import UserContext from "../UserContext";
+
 
 const App = () => {
-  // const [showLoginWindow, setShowLoginWindow] = useState(false);
-  const [userName, setUsername] = useState();
+  const [name, setName] = useState('Login');
 
   return (
       <BrowserRouter>
-          <Header username={userName}/>
-          <Routes>
-              <Route path={'/'} element={< Login />}/>
-              <Route path={'/Pulpit'} element={< Desktop />}/>
-              <Route path={'/Dodaj'} element={< AddTask />}/>
-              <Route path={'/:id'} element={< UpdateTask />}/>
-          </Routes>
+          <UserContext.Provider value={{name, setName}}>
+              <Header usernameH={name}/>
+              <Routes>
+                  <Route path={'/'} element={< Login />}/>
+                  <Route path={'/Pulpit'} element={< Desktop />}/>
+                  <Route path={'/Dodaj'} element={< AddTask />}/>
+                  <Route path={'/:id'} element={< UpdateTask />}/>
+              </Routes>
+          </UserContext.Provider>
       </BrowserRouter>
   );
 }

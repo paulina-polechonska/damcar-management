@@ -16,13 +16,16 @@ import {ThemeProvider} from '@mui/material/styles';
 import theme from "../theme/theme";
 import image from "../images/img1.jpg";
 import {useNavigate} from "react-router-dom";
+import UserContext from "../UserContext";
+import {useContext} from "react";
 
 
 const Login = () => {
+
     const navigate = useNavigate();
+    const user = useContext(UserContext);
 
     const [username, setUsername] = useState('');
-    const [openLoginWindow, setOpenLoginWindow] = useState(false);
     const [errors, setErrors] = useState([]);
 
 
@@ -30,12 +33,14 @@ const Login = () => {
         event.preventDefault();
         if (username.length > 4) {
             setUsername(username);
+            user.setName(username);
             navigate('/Pulpit');
         } else {
             setErrors('Login musi być dłuższy niż 4 znaki');
         }
-    };
 
+    };
+    console.log(username)
     return (
             <ThemeProvider theme={theme}>
                 <Container maxWidth="xl">
@@ -86,16 +91,6 @@ const Login = () => {
                                             error={(username.length < 5)}
                                             helperText={(username.length < 5) ? errors : null}
                                         />
-                                        {/*<TextField*/}
-                                        {/*    margin="normal"*/}
-                                        {/*    required*/}
-                                        {/*    fullWidth*/}
-                                        {/*    name="password"*/}
-                                        {/*    label="Hasło"*/}
-                                        {/*    type="password"*/}
-                                        {/*    id="password"*/}
-                                        {/*    autoComplete="current-password"*/}
-                                        {/*/>*/}
                                         <Button
                                             type="submit"
                                             fullWidth
