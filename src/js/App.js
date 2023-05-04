@@ -20,8 +20,8 @@ const App = () => {
       <BrowserRouter>
           <Header username={userName}/>
           <Routes>
-              <Route exact path={'/Pulpit'} element={< Desktop />}/>
-              <Route path={'/Zaloguj'} element={< Login />}/>
+              <Route path={'/'} element={< Login />}/>
+              <Route path={'/Pulpit'} element={< Desktop />}/>
               <Route path={'/Dodaj'} element={< AddTask />}/>
               <Route path={'/:id'} element={< UpdateTask />}/>
           </Routes>

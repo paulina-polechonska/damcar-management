@@ -21,7 +21,7 @@ import {AccountCircleOutlined} from "@mui/icons-material";
 
 const Header = (props) => {
     const { username } = props
-    const pages = ['Pulpit', 'Dodaj', 'Zaloguj'];
+    const pages = ['Pulpit', 'Dodaj'];
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
