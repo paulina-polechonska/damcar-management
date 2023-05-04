@@ -13,7 +13,7 @@ import {useNavigate} from "react-router-dom";
 
 
 const TasksList = (props) => {
-    const {rows, handleDeleteRow} = props;
+    const {rows, handleDeleteRow, handleFinishRow} = props;
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -73,7 +73,8 @@ const TasksList = (props) => {
                                 ).map((row) => (
                                     <Row key={row.id}
                                          row={row}
-                                         onDelete={handleDeleteRow}/>
+                                         onDelete={handleDeleteRow}
+                                         onFinish={handleFinishRow}/>
                                 ))}
 
                                 {emptyRows > 0 && (

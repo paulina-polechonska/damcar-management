@@ -27,7 +27,7 @@ import Chip from '@mui/material/Chip';
 
 
 function Row(props) {
-    const {row, onDelete} = props;
+    const {row, onDelete, onFinish} = props;
     const [open, setOpen] = useState(false);
     const [chipText, setChipText] = useState();
     const [chipColor, setChipColor] = useState(row.assent ? 'secondary' : 'error');
@@ -57,6 +57,14 @@ function Row(props) {
             .update({ finished: true })
             .eq('id', row.id)
             .select()
+
+        if (error) {
+            console.log(error)
+        }
+        if (data) {
+            console.log(data)
+            onFinish(row.id);
+        }
     }
 
 
@@ -72,7 +80,7 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row" align="center" >
+                <TableCell component="th" scope="row" align="center">
                     <Chip
                         label={(row.finished) ? 'Zakończone'
                             : (row.assent && !row.finished) ? 'W realizacji'

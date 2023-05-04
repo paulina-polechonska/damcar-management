@@ -17,6 +17,23 @@ const Desktop = () => {
         })
     }
 
+    const handleFinish = (id) => {
+        const fetchUpdateTasksList = async () => {
+            const { data, error } = await supabase
+                .from('tasks')
+                .select()
+
+            if (error) {
+                console.log(error);
+            }
+            if (data) {
+                setRows(data);
+            }
+        }
+
+        fetchUpdateTasksList();
+
+    }
 
 //pobranie danych z supabase
 
@@ -41,12 +58,18 @@ const Desktop = () => {
 
 
     }, []);
+
+    function sortById(a, b) {
+        return b.id - a.id;
+    }
+
+    rows.sort(sortById);
     console.log(rows);
 // <koniec pobranie danych z supabase>
 
 
     return (
-         <TasksList rows={rows} handleDeleteRow={handleDelete}/>
+         <TasksList rows={rows} handleDeleteRow={handleDelete} handleFinishRow={handleFinish}/>
 
 
     )
