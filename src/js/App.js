@@ -12,8 +12,8 @@ const App = () => {
   const [name, setName] = useState('Login');
 
   return (
-      // <BrowserRouter basename='/damcarManagement'>
-      <BrowserRouter>
+       <BrowserRouter basename='/damcar-management'>
+      // <BrowserRouter>
           <UserContext.Provider value={{name, setName}}>
               <Header usernameH={name}/>
               <Routes>
