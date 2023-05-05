@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/damcar-management/static/js/main.96a2c047.js",
+    "static/js/787.28cb0dcd.chunk.js": "/damcar-management/static/js/787.28cb0dcd.chunk.js",
+    "static/media/img1.jpg": "/damcar-management/static/media/img1.30ba830b75a66b86d064.jpg",
+    "index.html": "/damcar-management/index.html",
+    "main.96a2c047.js.map": "/damcar-management/static/js/main.96a2c047.js.map",
+    "787.28cb0dcd.chunk.js.map": "/damcar-management/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.96a2c047.js"
+  ]
+}
