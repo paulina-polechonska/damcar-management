@@ -36,7 +36,7 @@ const Header = (props) => {
     return (
 
         <ThemeProvider theme={theme}>
-            <AppBar position="static">
+            <AppBar position={"static"}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <ConstructionIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 2, fontSize: '2rem' }} color={'secondary'}/>
@@ -144,6 +144,7 @@ const Header = (props) => {
                         <AccountCircleOutlined
                             color={'secondary'}
                             sx={{fontSize: '2rem'}}
+
                         />
                         <Typography
                             variant="h6"

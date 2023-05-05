@@ -8,7 +8,8 @@ import Row from "./Table/Row";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import {useNavigate} from "react-router-dom";
-
+import {createTheme} from "@mui/material/styles";
+import {responsiveFontSizes} from "@mui/material";
 
 
 
@@ -37,6 +38,7 @@ const TasksList = (props) => {
     }
 
 
+
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl" >
@@ -57,13 +59,13 @@ const TasksList = (props) => {
                         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table collapsible">
                             <TableHead >
                                 <TableRow >
-                                    <TableCell />
-                                    <TableCell align="center">Status</TableCell>
-                                    <TableCell align="center">Numer rejestracyjny</TableCell>
-                                    <TableCell align="center">Pojazd</TableCell>
-                                    <TableCell align="center">Klient</TableCell>
-                                    <TableCell align="center">Telefon</TableCell>
-                                    <TableCell align="center">Akcje</TableCell>
+                                    <TableCell padding={"none"}/>
+                                    <TableCell align="center" padding={"none"}>Status</TableCell>
+                                    <TableCell align="center" padding={"none"}>Numer rejestracyjny</TableCell>
+                                    <TableCell align="center" padding={"none"}>Pojazd</TableCell>
+                                    <TableCell align="center" padding={"none"}>Klient</TableCell>
+                                    <TableCell align="center" padding={"none"}>Telefon</TableCell>
+                                    <TableCell align="center" padding={"none"}>Akcje</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

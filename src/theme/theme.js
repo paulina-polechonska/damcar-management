@@ -1,4 +1,5 @@
 import {createTheme} from "@mui/material/styles";
+import {responsiveFontSizes} from "@mui/material";
 
 
 const theme = createTheme({
@@ -16,7 +17,7 @@ const theme = createTheme({
     },
 
     paper: {
-        minWidth: 500,
+        // minWidth: 500,
         marginTop: 50,
         marginBottom: 50,
         marginLeft: 'auto',
@@ -25,10 +26,14 @@ const theme = createTheme({
     },
 
     typography: {
-        fontFamily: [
-            'Calibri',
-            'san-serif',
-        ].join(','),
+        fontFamily: ['Calibri', 'san-serif'].join(','),
+             h5: {
+                    fontSize: '1.1rem',
+                        '@media (min-width:600px)': {
+                        fontSize: '1.3rem',
+                    },
+             }
+
     },
 
     form: {
@@ -39,6 +44,10 @@ const theme = createTheme({
         },
 
     }
+
+
 });
+
+
 
 export default theme;
