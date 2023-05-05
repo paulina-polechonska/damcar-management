@@ -1,20 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Link, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {supabase} from "../supabase/api";
-import {ThemeProvider} from "@mui/material/styles";
-import theme from "../theme/theme";
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import {FormControl, FormControlLabel, IconButton, InputLabel, Select} from "@mui/material";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
-import {useNavigate} from "react-router-dom";
-import Box from "@mui/material/Box";
+import {Box, Button, Container, Checkbox, Grid, IconButton, MenuItem, Paper, ThemeProvider, Typography} from "@mui/material";
+import {FormControl, FormControlLabel, InputLabel, Select, TextField} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import {CAR_BRANDS} from "../utilities/carBrand";
+import theme from "../utilities/theme";
 
 
 const UpdateTask = () => {
@@ -29,18 +20,6 @@ const UpdateTask = () => {
     const [repair, setRepair] = useState('');
     const [checked, setChecked] = useState(false);
     const [errors, setErrors] = useState([]);
-
-    const brands = [
-        'Audi',
-        'BMW',
-        'Iveco',
-        'Mercedes',
-        'Peugeot',
-        'Skoda',
-        'Volkswagen',
-        'Inny'
-    ];
-
 
 
     useEffect(() => {
@@ -62,7 +41,6 @@ const UpdateTask = () => {
                 setCarType(data.car_type);
                 setRepair(data.to_do);
                 setChecked(data.assent);
-
             }
         }
         fetchTask();
@@ -95,7 +73,6 @@ const UpdateTask = () => {
             .eq('id', id)
             .select()
 
-
         if(error) {
             setErrors('Uzupełnij wszystkie pola formularza!')
         }
@@ -114,14 +91,20 @@ const UpdateTask = () => {
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl">
-                <Paper elevation={8} style={theme.paper} sx={{ height: { xs: '100%', md: '80%' }, padding: 3 }}>
+                <Paper elevation={8} style={theme.paper} sx={{  padding: 3 }}>
                     <Box display="flex" justifyContent="flex-end">
                         <IconButton onClick={handleClose}>
-                            <CloseIcon />
+                            <CloseIcon fontSize={"small"}/>
                         </IconButton>
                     </Box>
 
-                    <Typography variant="h4" component="h2" align={'center'} gutterBottom sx={{pt: 3, pb: 5}}>
+                    <Typography component="h2"
+                                variant="h3"
+                                color="secondary"
+                                gutterBottom
+                                sx={{pb: 2}}
+                                align={"center"}
+                    >
                         Edycja zlecenia
                     </Typography>
 
@@ -132,7 +115,7 @@ const UpdateTask = () => {
                               direction="row"
                               justifyContent="center"
                               alignItems="center"
-                              spacing={6}
+                              spacing={3}
                         >
                             <Grid item xs={12} md={6}>
                                 <FormControl fullWidth>
@@ -143,6 +126,7 @@ const UpdateTask = () => {
                                         variant="outlined"
                                         onChange={(e) => {
                                             setClientName(e.target.value)}}
+                                        size="small"
                                     />
                                 </FormControl>
                             </Grid>
@@ -155,6 +139,7 @@ const UpdateTask = () => {
                                         variant="outlined"
                                         onChange={(e) => {
                                             setClientPhone(e.target.value)}}
+                                        size="small"
                                     />
                                 </FormControl>
                             </Grid>
@@ -168,12 +153,13 @@ const UpdateTask = () => {
                                         variant="outlined"
                                         onChange={(e) => {
                                             setCarNumber(e.target.value)}}
+                                        size="small"
                                     />
                                 </FormControl>
                             </Grid>
 
                             <Grid item xs={12} md={4}>
-                                <FormControl fullWidth>
+                                <FormControl fullWidth size="small">
                                     <InputLabel id="brand">Marka</InputLabel>
                                     <Select
                                         labelId="brand"
@@ -183,7 +169,7 @@ const UpdateTask = () => {
                                         onChange={(e) => {
                                             setCarBrand(e.target.value)}}
                                     >
-                                        {brands.map(brand => (
+                                        {CAR_BRANDS.map(brand => (
                                             <MenuItem key={brand} value={brand}>
                                                 {brand}
                                             </MenuItem>
@@ -202,6 +188,7 @@ const UpdateTask = () => {
                                         variant="outlined"
                                         onChange={(e) => {
                                             setCarType(e.target.value)}}
+                                        size="small"
                                     />
                                 </FormControl>
                             </Grid>
@@ -216,13 +203,18 @@ const UpdateTask = () => {
                                         rows={5}
                                         onChange={(e) => {
                                             setRepair(e.target.value)}}
+                                        size="small"
                                     />
                                 </FormControl>
                             </Grid>
 
                             {errors &&
                                 <Grid item xs={12}>
-                                    <Typography color={'secondary'}>{errors}</Typography>
+                                    <Typography
+                                        color={'secondary'}
+                                    >
+                                        {errors}
+                                    </Typography>
                                 </Grid>
                             }
 
@@ -236,14 +228,14 @@ const UpdateTask = () => {
                                         onChange={(e) => {
                                             setChecked(e.target.checked)}}
                                     />}
-                                                  label="Zgoda na naprawę i koszty"/>
+                                    label="Zgoda na naprawę i koszty"/>
 
                             </Grid>
                             <Grid item xs={12} md={6}>
 
                             </Grid>
 
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12} md={4}>
                                 <Button fullWidth
                                         type="submit"
                                         variant="contained"
@@ -253,39 +245,14 @@ const UpdateTask = () => {
                                 </Button>
 
                             </Grid>
-
                         </Grid>
-
                     </form>
-
-
 
                 </Paper>
             </Container>
         </ThemeProvider>
     );
 };
-
-
-
-
-//     const taskToEdit = {
-//         client_name: clientNamex,
-//         client_phone: clientPhonex,
-//         car_number: carNumberx,
-//         car_brand: carBrandx,
-//         car_type: carTypex,
-//         to_do: repairx,
-//         assent: checkedx
-//     }
-//     console.log(taskToEdit)
-//
-//     return (
-//         <TaskForm initData={taskToEdit} submitLabel={"Edytuj"} title={"Edytuj"}/>
-//         // <h2>Update - {id}</h2>
-//     )
-// }
-
 
 
 

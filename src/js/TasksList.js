@@ -1,23 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import { useTheme, ThemeProvider} from '@mui/material/styles';
-import {Box, Container, Collapse, Paper, IconButton, Typography} from '@mui/material';
+import React, {useState} from 'react';
+import {Box, Container, Paper, ThemeProvider, Typography, Fab, Tooltip} from '@mui/material';
 import {Table, TableBody, TableHead, TableContainer, TableCell, TableFooter, TablePagination, TableRow} from "@mui/material";
-import theme from "../theme/theme";
+import theme from "../utilities/theme";
 import TablePaginationActions from "./Table/TablePaginationActions";
 import Row from "./Table/Row";
-import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import {useNavigate} from "react-router-dom";
-import {createTheme} from "@mui/material/styles";
-import {responsiveFontSizes} from "@mui/material";
-import {Tooltip} from "@mui/material";
-
 
 
 const TasksList = (props) => {
     const {rows, handleDeleteRow, handleFinishRow} = props;
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const navigate = useNavigate();
 
@@ -38,37 +32,44 @@ const TasksList = (props) => {
         navigate('/Dodaj');
     }
 
+    //nazwy kolumn
+    const columns = ['', 'Status', 'Numer rejestracyjny', 'Marka', 'Model', 'Klient', 'Telefon', 'Akcje']
 
 
     return (
         <ThemeProvider theme={theme}>
-            <Container maxWidth="xl" >
-                <Paper elevation={8} style={theme.paper} sx={{ padding: 5}}>
-                    <Box display="flex" justifyContent="space-between">
-                        <Typography component="h2" variant="h5" color="secondary" gutterBottom>
+            <Container maxWidth="xl">
+                <Paper elevation={8} style={theme.paper} sx={{padding: 5}}>
+                    <Box display="flex" justifyContent="space-between" alignContent={"center"}>
+                        <Typography component="h2" variant="h3" color="secondary" gutterBottom>
                             Aktualne zlecenia
                         </Typography>
 
-                        <Fab color="secondary" aria-label="add" onClick={handleAdd}>
+                        <Fab
+                            color="secondary"
+                            aria-label="add"
+                            onClick={handleAdd}
+                            size={"medium"}
+                        >
                             <Tooltip title="Dodaj zlecenie">
-                                <AddIcon />
+                                <AddIcon/>
                             </Tooltip>
                         </Fab>
-
                     </Box>
 
-
                     <TableContainer sx={{height: '100%', paddingTop: 3}}>
-                        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table collapsible">
-                            <TableHead >
-                                <TableRow >
-                                    <TableCell padding={"none"}/>
-                                    <TableCell align="center" padding={"none"}>Status</TableCell>
-                                    <TableCell align="center" padding={"none"}>Numer rejestracyjny</TableCell>
-                                    <TableCell align="center" padding={"none"}>Pojazd</TableCell>
-                                    <TableCell align="center" padding={"none"}>Klient</TableCell>
-                                    <TableCell align="center" padding={"none"}>Telefon</TableCell>
-                                    <TableCell align="center" padding={"none"}>Akcje</TableCell>
+                        <Table aria-label="custom pagination table collapsible">
+                            <TableHead>
+                                <TableRow>
+                                    {columns.map((column) =>
+                                        <TableCell
+                                            key={column}
+                                            align="center"
+                                            sx={{padding: '15px 0', fontWeight: 600}}
+                                        >
+                                            {column}
+                                        </TableCell>
+                                    )}
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -83,16 +84,16 @@ const TasksList = (props) => {
                                 ))}
 
                                 {emptyRows > 0 && (
-                                    <TableRow style={{ height: 53 * emptyRows }}>
-                                        <TableCell colSpan={8} />
+                                    <TableRow style={{height: 53 * emptyRows}}>
+                                        <TableCell colSpan={9}/>
                                     </TableRow>
                                 )}
                             </TableBody>
                             <TableFooter>
                                 <TableRow>
                                     <TablePagination
-                                        rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                                        colSpan={8}
+                                        rowsPerPageOptions={[5, 10, 25, {label: 'All', value: -1}]}
+                                        colSpan={9}
                                         count={rows.length}
                                         rowsPerPage={rowsPerPage}
                                         page={page}
@@ -102,6 +103,7 @@ const TasksList = (props) => {
                                             },
                                             native: true,
                                         }}
+                                        labelRowsPerPage={'Wyników na stronie'}
                                         onPageChange={handleChangePage}
                                         onRowsPerPageChange={handleChangeRowsPerPage}
                                         ActionsComponent={TablePaginationActions}

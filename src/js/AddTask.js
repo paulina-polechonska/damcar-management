@@ -1,34 +1,25 @@
 import React, {useState} from 'react';
-import Grid from '@mui/material/Grid';
-import {ThemeProvider} from "@mui/material/styles";
-import theme from "../theme/theme";
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
+import {
+    Box,
+    Button,
+    Checkbox,
+    Container,
+    Grid,
+    MenuItem,
+    Paper,
+    TextField,
+    ThemeProvider,
+    Typography
+} from '@mui/material';
 import {FormControl, InputLabel, Select, FormControlLabel, IconButton} from "@mui/material";
-import Checkbox from '@mui/material/Checkbox';
+import theme from "../utilities/theme";
 import {supabase} from "../supabase/api";
 import {useNavigate} from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
-import Box from '@mui/material/Box';
+import {CAR_BRANDS} from "../utilities/carBrand";
 
 
-const brands = [
-    'Audi',
-    'BMW',
-    'Iveco',
-    'Mercedes',
-    'Peugeot',
-    'Skoda',
-    'Volkswagen',
-    'Inny'
-];
-
-const AddTask = (props) => {
-    // const { initData, submitLabel, title } = props;
+const AddTask = () => {
 
     const navigate = useNavigate();
 
@@ -57,21 +48,21 @@ const AddTask = (props) => {
     const handleSumbit = async (event) => {
         event.preventDefault();
 
-        if(!clientName || !clientPhone || !carNumber || !carType || !carBrand || !repair) {
+        if (!clientName || !clientPhone || !carNumber || !carType || !carBrand || !repair) {
             setErrors('Uzupełnij wszystkie pola formularza!')
             return
         }
 
-        const { data, error } = await supabase
+        const {data, error} = await supabase
             .from('tasks')
             .insert([prepareData()])
             .select()
 
 
-        if(error) {
+        if (error) {
             setErrors('Uzupełnij wszystkie pola formularza!')
         }
-        if(data) {
+        if (data) {
             setErrors([]);
             navigate('/Pulpit');
         }
@@ -85,142 +76,172 @@ const AddTask = (props) => {
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="xl">
-                <Paper elevation={8} style={theme.paper} sx={{  padding: 3 }}>
-                    <Box display="flex" justifyContent="flex-end">
+                <Paper
+                    elevation={8}
+                    style={theme.paper}
+                    sx={{padding: 3}}
+                >
+                    <Box
+                        display="flex"
+                        justifyContent="flex-end"
+                    >
                         <IconButton onClick={handleClose}>
-                            <CloseIcon />
+                            <CloseIcon fontSize={"small"}/>
                         </IconButton>
                     </Box>
 
-                    <Typography variant="h4" component="h2" align={'center'} gutterBottom sx={{pb: 2}}>
+                    <Typography
+                        component="h2"
+                        variant="h3"
+                        color="secondary"
+                        gutterBottom
+                        sx={{pb: 2}}
+                        align={"center"}
+                    >
                         Dodaj zlecenie
                     </Typography>
 
-                <form onSubmit={handleSumbit}>
+                    <form onSubmit={handleSumbit}>
 
-                    <Grid container
-                          direction="row"
-                          justifyContent="center"
-                          alignItems="center"
-                          spacing={3}
-                    >
-                        <Grid item xs={12} md={6}>
-                            <FormControl fullWidth>
-                                <TextField
-                                    id="clientName"
-                                    value={clientName}
-                                    label="Klient"
-                                    variant="outlined"
-                                    onChange={(e) => {
-                                        setClientName(e.target.value)}}
-                                />
-                            </FormControl>
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <FormControl fullWidth>
-                                <TextField
-                                    id="clientPhone"
-                                    value={clientPhone}
-                                    label="Telefon"
-                                    variant="outlined"
-                                    onChange={(e) => {
-                                        setClientPhone(e.target.value)}}
-                                />
-                            </FormControl>
-                        </Grid>
-
-                        <Grid item xs={12} md={4}>
-                            <FormControl fullWidth>
-                                <TextField
-                                    id="carNumber"
-                                    value={carNumber}
-                                    label="Numer rejestracyjny"
-                                    variant="outlined"
-                                    onChange={(e) => {
-                                        setCarNumber(e.target.value)}}
-                                />
-                            </FormControl>
-                        </Grid>
-
-                        <Grid item xs={12} md={4}>
-                            <FormControl fullWidth>
-                                <InputLabel id="brand">Marka</InputLabel>
-                                <Select
-                                    labelId="brand"
-                                    id="carBrand"
-                                    value={carBrand}
-                                    label="Marka"
-                                    onChange={(e) => {
-                                        setCarBrand(e.target.value)}}
-                                >
-                                    {brands.map(brand => (
-                                        <MenuItem key={brand} value={brand}>
-                                            {brand}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        </Grid>
-
-
-                        <Grid item xs={12} md={4}>
-                            <FormControl fullWidth>
-                                <TextField
-                                    id="carType"
-                                    value={carType}
-                                    label="Model"
-                                    variant="outlined"
-                                    onChange={(e) => {
-                                        setCarType(e.target.value)}}
-                                />
-                            </FormControl>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <FormControl fullWidth>
-                                <TextField
-                                    id="repair"
-                                    value={repair}
-                                    label="Zakres napraw"
-                                    multiline
-                                    rows={5}
-                                    onChange={(e) => {
-                                        setRepair(e.target.value)}}
-                                />
-                            </FormControl>
-                        </Grid>
-
-                        {errors &&
-                            <Grid item xs={12}>
-                                <Typography color={'secondary'}>{errors}</Typography>
+                        <Grid container
+                              direction="row"
+                              justifyContent="center"
+                              alignItems="center"
+                              spacing={3}
+                        >
+                            <Grid item xs={12} md={6}>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        id="clientName"
+                                        value={clientName}
+                                        label="Klient"
+                                        variant="outlined"
+                                        onChange={(e) => {
+                                            setClientName(e.target.value)
+                                        }}
+                                        size="small"
+                                    />
+                                </FormControl>
                             </Grid>
-                        }
+                            <Grid item xs={12} md={6}>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        id="clientPhone"
+                                        value={clientPhone}
+                                        label="Telefon"
+                                        variant="outlined"
+                                        onChange={(e) => {
+                                            setClientPhone(e.target.value)
+                                        }}
+                                        size="small"
+                                    />
+                                </FormControl>
+                            </Grid>
+
+                            <Grid item xs={12} md={4}>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        id="carNumber"
+                                        value={carNumber}
+                                        label="Numer rejestracyjny"
+                                        variant="outlined"
+                                        onChange={(e) => {
+                                            setCarNumber(e.target.value)
+                                        }}
+                                        size="small"
+                                    />
+                                </FormControl>
+                            </Grid>
+
+                            <Grid item xs={12} md={4}>
+                                <FormControl fullWidth size="small">
+                                    <InputLabel id="brand">Marka</InputLabel>
+                                    <Select
+                                        labelId="brand"
+                                        id="carBrand"
+                                        value={carBrand}
+                                        label="Marka"
+                                        onChange={(e) => {
+                                            setCarBrand(e.target.value)
+                                        }}
+
+                                    >
+                                        {CAR_BRANDS.map(brand => (
+                                            <MenuItem
+                                                key={brand}
+                                                value={brand}
+                                            >
+                                                {brand}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
 
 
-                        <Grid item xs={12}>
-                            <FormControlLabel control={
-                                <Checkbox
-                                    checked={checked}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                    color={'secondary'}
-                                    onChange={(e) => {
-                                        setChecked(e.target.checked)}}
-                            />}
-                                label="Zgoda na naprawę i koszty"/>
+                            <Grid item xs={12} md={4}>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        id="carType"
+                                        value={carType}
+                                        label="Model"
+                                        variant="outlined"
+                                        onChange={(e) => {
+                                            setCarType(e.target.value)
+                                        }}
+                                        size="small"
+                                    />
+                                </FormControl>
+                            </Grid>
 
+                            <Grid item xs={12}>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        id="repair"
+                                        value={repair}
+                                        label="Zakres napraw"
+                                        multiline
+                                        rows={5}
+                                        onChange={(e) => {
+                                            setRepair(e.target.value)
+                                        }}
+                                        size="small"
+                                    />
+                                </FormControl>
+                            </Grid>
+
+                            {errors &&
+                                <Grid item xs={12}>
+                                    <Typography color={'secondary'}>{errors}</Typography>
+                                </Grid>
+                            }
+
+                            <Grid item xs={12}>
+                                <FormControlLabel control={
+                                    <Checkbox
+                                        checked={checked}
+                                        inputProps={{'aria-label': 'controlled'}}
+                                        color={'secondary'}
+                                        onChange={(e) => {
+                                            setChecked(e.target.checked)
+                                        }}
+                                    />
+                                }
+                                    label="Zgoda na naprawę i koszty"/>
+
+                            </Grid>
+
+                            <Grid item xs={12} md={4}>
+                                <Button fullWidth
+                                        type="submit"
+                                        variant="contained"
+                                        sx={{mt: 3, mb: 2}}
+                                >
+                                    Dodaj
+                                </Button>
+                            </Grid>
                         </Grid>
-
-                        <Grid item xs={12} md={6}>
-                            <Button fullWidth
-                                type="submit"
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Dodaj
-                            </Button>
-                        </Grid>
-                    </Grid>
-                </form>
+                    </form>
 
                 </Paper>
             </Container>

@@ -1,41 +1,25 @@
 import React, {useState} from "react";
 import {
-    Box,
-    Card,
-    CardContent,
-    Collapse,
-    IconButton,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    Typography
+    Box, Chip, Collapse, IconButton, Table, TableBody, TableCell, TableRow, Typography, ThemeProvider, Tooltip
 } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from '@mui/icons-material/Check';
-import {Link, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {supabase} from "../../supabase/api";
-import Button from "@mui/material/Button";
-import theme from "../../theme/theme";
-import {ThemeProvider} from "@mui/material/styles";
-import Chip from '@mui/material/Chip';
-import Tooltip from '@mui/material/Tooltip';
-
-
+import theme from "../../utilities/theme";
 
 
 function Row(props) {
     const {row, onDelete, onFinish} = props;
     const [open, setOpen] = useState(false);
-    const [chipText, setChipText] = useState();
-    const [chipColor, setChipColor] = useState(row.assent ? 'secondary' : 'error');
 
 
+// usuwanie wiersza z bazy
     const handleDelete = async () => {
-        const {data, error } = await supabase
+        const {data, error} = await supabase
             .from('tasks')
             .delete()
             .eq('id', row.id)
@@ -50,12 +34,13 @@ function Row(props) {
         }
     }
 
+    //zakończenie tasku
     const handleFinish = async (event) => {
         event.preventDefault();
 
-        const { data, error } = await supabase
+        const {data, error} = await supabase
             .from('tasks')
-            .update({ finished: true })
+            .update({finished: true})
             .eq('id', row.id)
             .select()
 
@@ -71,8 +56,8 @@ function Row(props) {
 
     return (
         <ThemeProvider theme={theme}>
-            <TableRow sx={{ '& > *': { borderBottom: 'none' } }}>
-                <TableCell>
+            <TableRow sx={{'& > *': {borderBottom: 'none'}}}>
+                <TableCell padding={"none"}>
                     <IconButton
                         aria-label="expand row"
                         size="small"
@@ -80,65 +65,151 @@ function Row(props) {
                     >
                         {open ?
                             <Tooltip title="Ukryj naprawy">
-                            <KeyboardArrowUpIcon />
+                                <KeyboardArrowUpIcon/>
                             </Tooltip>
-                                :
+                            :
                             <Tooltip title="Pokaż naprawy">
-                                <KeyboardArrowDownIcon />
+                                <KeyboardArrowDownIcon/>
                             </Tooltip>}
-
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row" align="center">
+
+                <TableCell component="th" scope="row" align="center" sx={{padding: '10px'}}>
                     <Chip
                         label={(row.finished) ? 'Zakończone'
                             : (row.assent && !row.finished) ? 'W realizacji'
-                            : 'Nowy'}
+                                : 'Nowy'}
                         color={(row.finished) ? 'primary'
                             : (row.assent && !row.finished) ? 'secondary'
-                            : 'primary'}
-                        sx={{width: '80%'}}
+                                : 'primary'}
                         variant={(row.finished) ? 'outlined' : 'filled'}
+                        sx={{width: '100%'}}
                     />
                 </TableCell>
-                <TableCell component="th" scope="row" align="center">{row.car_number}</TableCell>
-                <TableCell component="th" scope="row" align="center">{row.car_brand} {row.car_type}</TableCell>
-                <TableCell component="th" scope="row" align="center">{row.client_name}</TableCell>
-                <TableCell component="th" scope="row" align="center">{row.client_phone}</TableCell>
-                <TableCell component="th" scope="row" align="right">
-                    <IconButton aria-label="delete" onClick={handleDelete} disabled={(row.finished) ? true : false}>
+
+                <TableCell
+                    component="th"
+                    scope="row"
+                    align="center"
+                    sx={{padding: '10px'}}
+                >
+                    {row.car_number}
+                </TableCell>
+
+                <TableCell
+                    component="th"
+                    scope="row"
+                    align="center"
+                    sx={{padding: '10px'}}
+                >
+                    {row.car_brand}
+                </TableCell>
+
+                <TableCell
+                    component="th"
+                    scope="row"
+                    align="center"
+                    sx={{padding: '10px'}}
+                >
+                    {row.car_type}
+                </TableCell>
+
+                <TableCell
+                    component="th"
+                    scope="row"
+                    align="center"
+                    sx={{padding: '10px'}}
+                >
+                    {row.client_name}
+                </TableCell>
+
+                <TableCell
+                    component="th"
+                    scope="row"
+                    align="center"
+                    sx={{padding: '10px'}}
+                >
+                    {row.client_phone}
+                </TableCell>
+
+                <TableCell
+                    component="th"
+                    scope="row"
+                    align="center"
+                    sx={{padding: '10px'}}
+                >
+
+                    <IconButton
+                        aria-label="delete"
+                        onClick={handleDelete}
+                        disabled={!!(row.finished)}
+                    >
                         <Tooltip title="Usuń">
-                            <DeleteIcon />
+                            <DeleteIcon/>
                         </Tooltip>
                     </IconButton>
+
                     <IconButton
                         aria-label="edit"
                         component={NavLink}
                         to={'/' + row.id}
-                        disabled={(row.finished) ? true : false}>
+                        disabled={!!(row.finished)}
+                    >
                         <Tooltip title="Edytuj">
-                            <EditIcon />
+                            <EditIcon/>
                         </Tooltip>
                     </IconButton>
-                    <IconButton aria-label="check" onClick={handleFinish} disabled={(row.finished) ? true : false}>
+
+                    <IconButton
+                        aria-label="check"
+                        onClick={handleFinish}
+                        disabled={!!(row.finished)}
+                    >
                         <Tooltip title="Zakończ">
-                            <CheckIcon />
+                            <CheckIcon/>
                         </Tooltip>
                     </IconButton>
+
                 </TableCell>
             </TableRow>
-            <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
-                            <Typography variant="h6" gutterBottom component="div">
-                                Zakres napraw
-                            </Typography>
-                            <Table size="small" aria-label="purchases" >
 
+            {/*Rozwijalna część*/}
+            <TableRow>
+
+                <TableCell
+                    style={{padding: '0 35px'}}
+                    colSpan={9}
+                >
+                    <Collapse
+                        in={open}
+                        timeout="auto"
+                        unmountOnExit
+                    >
+                        <Box sx={{margin: 1}}>
+                            <Table
+                                size="small"
+                                aria-label="purchases"
+                            >
                                 <TableBody>
-                                    <TableRow >
-                                        <TableCell sx={{ borderBottom: 'none'}}>{row.to_do}</TableCell>
+                                    <TableRow>
+                                        <TableCell
+                                            sx={{
+                                                borderBottom: 'none',
+                                                fontSize: '1rem',
+                                                fontWeight: 600,
+                                                padding: '6px 0'
+                                            }}
+                                        >
+                                            Zakres napraw
+                                        </TableCell>
+                                    </TableRow>
+
+                                    <TableRow>
+                                        <Typography
+                                            sx={{borderBottom: 'none', padding: '6px 0'}}
+                                        >
+                                            {row.to_do}
+                                        </Typography>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -146,10 +217,9 @@ function Row(props) {
                     </Collapse>
                 </TableCell>
             </TableRow>
-            </ThemeProvider>
+        </ThemeProvider>
     );
 }
-
 
 
 export default Row;
