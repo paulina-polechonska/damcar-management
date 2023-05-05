@@ -42,7 +42,6 @@ const theme = createTheme({
             flexWrap: 'wrap',
             margin: '0 auto',
         },
-
     }
 
 

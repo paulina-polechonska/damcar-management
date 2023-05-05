@@ -22,6 +22,7 @@ import Button from "@mui/material/Button";
 import theme from "../../theme/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import Chip from '@mui/material/Chip';
+import Tooltip from '@mui/material/Tooltip';
 
 
 
@@ -77,7 +78,15 @@ function Row(props) {
                         size="small"
                         onClick={() => setOpen(!open)}
                     >
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                        {open ?
+                            <Tooltip title="Ukryj naprawy">
+                            <KeyboardArrowUpIcon />
+                            </Tooltip>
+                                :
+                            <Tooltip title="Pokaż naprawy">
+                                <KeyboardArrowDownIcon />
+                            </Tooltip>}
+
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row" align="center">
@@ -98,17 +107,23 @@ function Row(props) {
                 <TableCell component="th" scope="row" align="center">{row.client_phone}</TableCell>
                 <TableCell component="th" scope="row" align="right">
                     <IconButton aria-label="delete" onClick={handleDelete} disabled={(row.finished) ? true : false}>
-                        <DeleteIcon />
+                        <Tooltip title="Usuń">
+                            <DeleteIcon />
+                        </Tooltip>
                     </IconButton>
                     <IconButton
                         aria-label="edit"
                         component={NavLink}
                         to={'/' + row.id}
                         disabled={(row.finished) ? true : false}>
-                        <EditIcon />
+                        <Tooltip title="Edytuj">
+                            <EditIcon />
+                        </Tooltip>
                     </IconButton>
                     <IconButton aria-label="check" onClick={handleFinish} disabled={(row.finished) ? true : false}>
-                        <CheckIcon />
+                        <Tooltip title="Zakończ">
+                            <CheckIcon />
+                        </Tooltip>
                     </IconButton>
                 </TableCell>
             </TableRow>

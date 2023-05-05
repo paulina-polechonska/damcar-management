@@ -10,6 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import {useNavigate} from "react-router-dom";
 import {createTheme} from "@mui/material/styles";
 import {responsiveFontSizes} from "@mui/material";
+import {Tooltip} from "@mui/material";
 
 
 
@@ -49,7 +50,9 @@ const TasksList = (props) => {
                         </Typography>
 
                         <Fab color="secondary" aria-label="add" onClick={handleAdd}>
-                            <AddIcon />
+                            <Tooltip title="Dodaj zlecenie">
+                                <AddIcon />
+                            </Tooltip>
                         </Fab>
 
                     </Box>
