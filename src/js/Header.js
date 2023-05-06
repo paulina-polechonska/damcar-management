@@ -148,7 +148,7 @@ const Header = (props) => {
 
                         <IconButton
                             component="a"
-                            href="/damcar-management">
+                            href="/damcar-management/">
                             <AccountCircleOutlined
                                 color={'secondary'}
                                 sx={{fontSize: '2rem'}}
@@ -159,7 +159,7 @@ const Header = (props) => {
                             variant="h6"
                             noWrap
                             component="a"
-                            href="/"
+                            href="/damcar-management/"
                             sx={{
                                 ml: 1,
                                 mr: 1,
