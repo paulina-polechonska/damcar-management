@@ -16,7 +16,7 @@ const App = () => {
           <UserContext.Provider value={{name, setName}}>
               <Header usernameH={name}/>
               <Routes>
-                  <Route path='/' element={< Login />}/>
+                  <Route exact path='/' element={< Login />}/>
                   <Route path='/Pulpit' element={< Desktop />}/>
                   <Route path='/Dodaj' element={< AddTask />}/>
                   <Route path='/:id' element={< UpdateTask />}/>

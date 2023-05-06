@@ -131,7 +131,7 @@ const Header = (props) => {
                                     onClick={handleCloseNavMenu}
                                     sx={{
                                         my: 'auto',
-                                        display: (usernameH === 'Login') ? "none" : "block",
+                                        // display: (usernameH === 'Login') ? "none" : "block",
                                         fontSize: '1.1rem',
                                         fontWeight: 400,
                                         padding: '15px'
